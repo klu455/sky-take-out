@@ -28,14 +28,20 @@ public interface ShoppingCartMapper {
     * 插入购物车数据
     * @param shoppingCart
     * */
-    @Insert("insert into shopping_cart(name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, image,create_time) " +
-            "values (#{name}, #{image}, #{userId}, #{dishId}, #{setmealId}, #{dishFlavor}, #{number}, #{amount}, #{image},#{createTime})")
+    @Insert("insert into shopping_cart(name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time) " +
+            "values (#{name}, #{image}, #{userId}, #{dishId}, #{setmealId}, #{dishFlavor}, #{number}, #{amount}, #{createTime})")
     void insert(ShoppingCart shoppingCart);
 
 
     /*
-    * 根据用户id删除购物车数据
+    * 根据用户id删除购物车数据（清空）
     * */
     @Delete("delete from shopping_cart where user_id = #{userId}")
     void deleteByUserId(Long userId);
+
+    /*
+    * 根据用户id删除购物车数据 （批量或一条）
+    * */
+    @Delete("delete from shopping_cart where id = #{id}")
+    void deleteById(Long id);
 }

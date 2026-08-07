@@ -23,7 +23,7 @@ public class ShoppingCartController {
     * @param shoppingCartDTO
     * */
     @PostMapping("/add")
-    public Result add(ShoppingCartDTO shoppingCartDTO){
+    public Result add(@RequestBody ShoppingCartDTO shoppingCartDTO){
         log.info("添加购物车，商品信息为：{}", shoppingCartDTO);
         shoppingCartService.addShoppingCart(shoppingCartDTO);
         return Result.success();
@@ -50,6 +50,17 @@ public class ShoppingCartController {
     public Result clean(){
         shoppingCartService.cleanShoppingCart();
 
+        return Result.success();
+    }
+
+    /*
+    * 删除购物车中一个商品
+    * @param shoppingCartDTO
+    * */
+    @PostMapping("/sub")
+    public Result sub(@RequestBody ShoppingCartDTO shoppingCartDTO){
+        log.info("删除购物车中一个商品，商品：{}",shoppingCartDTO);
+        shoppingCartService.subShoppingCart(shoppingCartDTO);
         return Result.success();
     }
 }
